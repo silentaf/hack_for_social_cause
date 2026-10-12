@@ -3,29 +3,59 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RakshaGrid</title>
+<title>FasalRaksha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="header">
-    <h1>🛡️ RakshaGrid</h1>
+    <div class="brand">
+      <div class="brand-icon">🌾</div>
+      <div>
+        <h1>FasalRaksha</h1>
+        <div class="tag">Climate-risk early warning for crop insurance</div>
+      </div>
+    </div>
     <div class="nav-links">
-      <a href="dashboard.html">Control Room</a>
-      <a href="citizen.html">Citizen Help</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="farmer.html">Farmer</a>
+      <a href="officer.html">Officer Dashboard</a>
     </div>
   </div>
 
   <div class="hero">
-    <h1>AI-powered crowd safety for mass gatherings</h1>
+    <p style="display:inline-block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7a5520;background:var(--brand-gold-soft);padding:8px 16px;border-radius:100px;margin-bottom:18px;">Hack for Social Cause 2027 · Rural Development &amp; AI/GIS</p>
+    <h1>Real-time rainfall evidence, before the claim fight starts</h1>
     <p>
-      RakshaGrid monitors real-time crowd density across a gathering like the Kumbh Mela,
-      predicts dangerous surges before they become stampedes, and gives pilgrims a one-tap
-      way to reach medical help or report a lost person — routed to the nearest camp
-      automatically.
+      Under India's crop insurance scheme, farmers often wait weeks for a manual field
+      survey to even begin proving a rainfall-driven loss — and disputes over whether a
+      real deficit occurred are common because there's no independent record of it as it
+      happened. FasalRaksha pulls real historical and current-season rainfall for a
+      farmer's exact plot, compares it against that plot's own multi-year norm for the
+      same crop stage, and generates a timestamped evidence record the moment a genuine
+      deficit shows up — so the evidence exists from day one, not after the fact.
     </p>
     <div class="actions">
-      <a class="btn" href="dashboard.html">Open Control Room Dashboard</a>
-      <a class="btn secondary" href="citizen.html">Open Citizen Help Page</a>
+      <a class="btn gold" href="farmer.html">Register a Plot (Farmer)</a>
+      <a class="btn secondary" href="officer.html">Open Officer Dashboard</a>
+    </div>
+  </div>
+
+  <div class="page" style="margin-top:-20px;">
+    <div class="layout" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="card" style="padding:28px;">
+        <h3 style="margin:0 0 8px;font-family:'EB Garamond',Georgia,serif;font-size:22px;">Real data, not simulation</h3>
+        <p style="color:var(--text-secondary);font-size:14px;line-height:1.5;margin:0;">Live rainfall figures come from Open-Meteo's ERA5 reanalysis — genuine historical climate data for any coordinate, not a mock feed.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <h3 style="margin:0 0 8px;font-family:'EB Garamond',Georgia,serif;font-size:22px;">Honest scope</h3>
+        <p style="color:var(--text-secondary);font-size:14px;line-height:1.5;margin:0;">This doesn't auto-approve insurance payouts. It produces evidence and triage to speed up the human verification that still has to happen.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <h3 style="margin:0 0 8px;font-family:'EB Garamond',Georgia,serif;font-size:22px;">Built for both sides</h3>
+        <p style="color:var(--text-secondary);font-size:14px;line-height:1.5;margin:0;">Farmers get a plain-language advisory in their own language. Insurance/agriculture officers get a triage dashboard across every registered plot.</p>
+      </div>
     </div>
   </div>
 </body>

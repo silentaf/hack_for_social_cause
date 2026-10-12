@@ -1,78 +1,77 @@
 const path = require('path');
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const sim = require('./simulator');
+const crops = require('./crops');
+const store = require('./store');
+const { assessPlotCached } = require('./assess');
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.get('/api/zones', (req, res) => {
-  res.json(sim.getZoneStates());
+app.get('/api/crops', (req, res) => {
+  res.json(crops.listCrops());
 });
 
-app.get('/api/zones/:id/history', (req, res) => {
-  const data = sim.getHistory(req.params.id);
-  if (!data) return res.status(404).json({ error: 'zone not found' });
-  res.json(data);
+app.post('/api/plots', (req, res) => {
+  const { name, farmerName, phone, lat, lng, cropId, sowingDate, lang } = req.body || {};
+  if (lat === undefined || lng === undefined || !cropId || !sowingDate) {
+    return res.status(400).json({ error: 'lat, lng, cropId and sowingDate are required' });
+  }
+  if (!crops.getCrop(cropId)) return res.status(400).json({ error: 'unknown cropId' });
+  const plot = store.addPlot({
+    name: name || 'Unnamed plot',
+    farmerName: farmerName || '',
+    phone: phone || '',
+    lat: Number(lat),
+    lng: Number(lng),
+    cropId,
+    sowingDate,
+    lang: lang || 'en',
+  });
+  res.json(plot);
 });
 
-app.get('/api/camps', (req, res) => {
-  res.json(sim.getCamps());
+app.get('/api/plots', async (req, res) => {
+  const plots = store.listPlots();
+  const results = [];
+  for (const plot of plots) {
+    try {
+      const assessment = await assessPlotCached(plot, plot.lang || 'en');
+      results.push({ ...plot, assessment });
+    } catch (e) {
+      results.push({ ...plot, assessment: null, error: e.message });
+    }
+  }
+  res.json(results);
 });
 
-app.get('/api/alerts', (req, res) => {
-  res.json(sim.getAlerts());
+app.get('/api/plots/:id', async (req, res) => {
+  const plot = store.getPlot(req.params.id);
+  if (!plot) return res.status(404).json({ error: 'plot not found' });
+  try {
+    const lang = req.query.lang || plot.lang || 'en';
+    const assessment = await assessPlotCached(plot, lang);
+    res.json({ ...plot, assessment });
+  } catch (e) {
+    res.status(502).json({ error: 'climate data unavailable', detail: e.message });
+  }
 });
 
-app.get('/api/sos', (req, res) => {
-  res.json(sim.getSosReports());
+app.get('/api/plots/:id/evidence', async (req, res) => {
+  const plot = store.getPlot(req.params.id);
+  if (!plot) return res.status(404).json({ error: 'plot not found' });
+  try {
+    const lang = req.query.lang || plot.lang || 'en';
+    const assessment = await assessPlotCached(plot, lang);
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="evidence-${plot.id}.txt"`);
+    res.send(assessment.evidenceText);
+  } catch (e) {
+    res.status(502).json({ error: 'climate data unavailable', detail: e.message });
+  }
 });
-
-app.post('/api/sos', (req, res) => {
-  const { type, name, phone, zoneId, description } = req.body || {};
-  if (!type || !zoneId) return res.status(400).json({ error: 'type and zoneId are required' });
-  const report = sim.addSos({ type, name, phone, zoneId, description });
-  io.emit('sosNew', report);
-  res.json(report);
-});
-
-app.post('/api/sos/:id/resolve', (req, res) => {
-  const report = sim.resolveSos(req.params.id);
-  if (!report) return res.status(404).json({ error: 'not found' });
-  io.emit('sosResolved', report);
-  res.json(report);
-});
-
-app.post('/api/zones/:id/surge', (req, res) => {
-  const ok = sim.triggerSurge(req.params.id);
-  if (!ok) return res.status(404).json({ error: 'zone not found' });
-  res.json({ ok: true });
-});
-
-app.post('/api/zones/:id/reset', (req, res) => {
-  const ok = sim.resetZone(req.params.id);
-  if (!ok) return res.status(404).json({ error: 'zone not found' });
-  res.json({ ok: true });
-});
-
-io.on('connection', (socket) => {
-  socket.emit('zoneSnapshot', sim.getZoneStates());
-  socket.emit('alertSnapshot', sim.getAlerts());
-  socket.emit('sosSnapshot', sim.getSosReports());
-});
-
-setInterval(() => {
-  const { zones, alerts } = sim.tick();
-  io.emit('zoneUpdate', zones);
-  alerts.forEach((a) => io.emit('alert', a));
-}, sim.TICK_MS);
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`RakshaGrid server running at http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`FasalRaksha server running at http://localhost:${PORT}`);
 });

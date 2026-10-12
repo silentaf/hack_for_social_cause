@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FasalRaksha — Farmer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">🌾</div>
+      <div><h1>FasalRaksha</h1></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="farmer.html" class="active" data-i18n="nav_farmer">Farmer</a>
+      <a href="officer.html">Officer Dashboard</a>
+      <a href="#" onclick="toggleLang();return false;" id="langToggle"></a>
+    </div>
+  </div>
+
+  <div class="citizen-wrap">
+    <div id="myPlotsWrap" style="display:none;margin-bottom:24px;">
+      <h2 style="font-size:16px;" data-i18n="my_plots">My Plots</h2>
+      <div id="myPlotsList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+
+    <div class="card" style="padding:22px;margin-bottom:24px;" id="registerCard">
+      <h2 style="margin:0 0 14px;font-size:18px;" data-i18n="register_title">Register a plot</h2>
+
+      <div class="field">
+        <label data-i18n="label_plot_name">Plot name (optional)</label>
+        <input id="fPlotName" type="text" data-i18n-placeholder="ph_plot_name" placeholder="e.g. North field" />
+      </div>
+      <div class="field">
+        <label data-i18n="label_farmer_name">Your name</label>
+        <input id="fFarmerName" type="text" data-i18n-placeholder="ph_name" placeholder="Full name" />
+      </div>
+      <div class="field">
+        <label data-i18n="label_phone">Phone number</label>
+        <input id="fPhone" type="tel" data-i18n-placeholder="ph_phone" placeholder="10-digit mobile number" />
+      </div>
+      <div class="field" style="display:flex;gap:10px;">
+        <div style="flex:1;">
+          <label data-i18n="label_lat">Latitude</label>
+          <input id="fLat" type="number" step="0.0001" placeholder="25.4500" />
+        </div>
+        <div style="flex:1;">
+          <label data-i18n="label_lng">Longitude</label>
+          <input id="fLng" type="number" step="0.0001" placeholder="81.8500" />
+        </div>
+      </div>
+      <button class="btn secondary small" onclick="useMyLocation()" style="margin-bottom:14px;" data-i18n="btn_use_location">📍 Use my current location</button>
+
+      <div class="field">
+        <label data-i18n="label_crop">Crop</label>
+        <select id="fCrop"></select>
+      </div>
+      <div class="field">
+        <label data-i18n="label_sowing">Sowing date</label>
+        <input id="fSowing" type="date" />
+      </div>
+
+      <button class="btn gold" onclick="registerPlot()" data-i18n="btn_register">Register &amp; Check Risk</button>
+      <div class="meta" id="registerError" style="color:var(--status-critical);margin-top:8px;"></div>
+    </div>
+
+    <div id="assessmentWrap" style="display:none;"></div>
+  </div>
+
+  <script src="js/farmer.js"></script>
+</body>
+</html>
