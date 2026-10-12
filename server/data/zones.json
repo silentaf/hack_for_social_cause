@@ -1,0 +1,12 @@
+[
+  { "id": "z1", "name": "Sangam Nose", "lat": 25.4306, "lng": 81.8831, "capacity": 50000, "description": "Confluence point - highest footfall for holy dip" },
+  { "id": "z2", "name": "Sector 3 - Jhunsi Ghat", "lat": 25.4350, "lng": 81.8900, "capacity": 35000, "description": "Primary bathing ghat, east bank" },
+  { "id": "z3", "name": "Sector 7 - Arail", "lat": 25.4230, "lng": 81.8700, "capacity": 30000, "description": "Residential tent city, south bank" },
+  { "id": "z4", "name": "Sector 12 - Jhusi Approach", "lat": 25.4420, "lng": 81.8950, "capacity": 25000, "description": "Main pontoon bridge approach" },
+  { "id": "z5", "name": "Kalyani Devi Road", "lat": 25.4600, "lng": 81.8450, "capacity": 20000, "description": "Primary vehicular + foot entry corridor" },
+  { "id": "z6", "name": "Mela Chowk - Sector 5", "lat": 25.4280, "lng": 81.8600, "capacity": 28000, "description": "Market and transit hub" },
+  { "id": "z7", "name": "Akshayvat Ghat", "lat": 25.4330, "lng": 81.8780, "capacity": 22000, "description": "Secondary bathing ghat" },
+  { "id": "z8", "name": "Railway Station Approach", "lat": 25.4450, "lng": 81.8300, "capacity": 18000, "description": "Prayagraj Jct pedestrian corridor" },
+  { "id": "z9", "name": "Sector 9 - Naini Bridge Head", "lat": 25.4150, "lng": 81.8550, "capacity": 24000, "description": "Bridge choke point, south approach" },
+  { "id": "z10", "name": "VIP Ghat - Sector 1", "lat": 25.4380, "lng": 81.8820, "capacity": 15000, "description": "Administrative and VIP darshan area" }
+]

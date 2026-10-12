@@ -1,0 +1,9 @@
+[
+  { "id": "c1", "name": "Central Medical Camp - Sangam", "type": "medical", "lat": 25.4318, "lng": 81.8815, "phone": "108" },
+  { "id": "c2", "name": "Jhunsi Medical Post", "type": "medical", "lat": 25.4360, "lng": 81.8890, "phone": "108" },
+  { "id": "c3", "name": "Arail Medical Post", "type": "medical", "lat": 25.4240, "lng": 81.8710, "phone": "108" },
+  { "id": "c4", "name": "Sector 5 Police Help Booth", "type": "police", "lat": 25.4285, "lng": 81.8610, "phone": "100" },
+  { "id": "c5", "name": "Mela Chowk Lost & Found Kendra", "type": "lost_found", "lat": 25.4278, "lng": 81.8605, "phone": "1363" },
+  { "id": "c6", "name": "Railway Approach Police Booth", "type": "police", "lat": 25.4445, "lng": 81.8310, "phone": "100" },
+  { "id": "c7", "name": "Naini Bridge Medical Post", "type": "medical", "lat": 25.4160, "lng": 81.8560, "phone": "108" }
+]

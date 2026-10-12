@@ -1,0 +1,17 @@
+{
+  "name": "rakshagrid",
+  "version": "1.0.0",
+  "description": "AI-powered crowd safety and disaster mitigation platform for mass gatherings (Kumbh Mela model) — built for Hack for Social Cause 2027",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": ["crowd-safety", "disaster-mitigation", "kumbh-mela", "hackathon"],
+  "author": "Aman Gupta",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.3.0",
+    "socket.io": "^4.8.4"
+  }
+}
